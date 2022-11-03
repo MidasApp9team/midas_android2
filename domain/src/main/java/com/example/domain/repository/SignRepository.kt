@@ -8,4 +8,6 @@ interface SignRepository {
     suspend fun signIn(signInEntity: SignInEntity): SignInParam
 
     suspend fun autoLogin(): SignInParam
+
+    suspend fun saveSign(signInEntity: SignInEntity)
 }

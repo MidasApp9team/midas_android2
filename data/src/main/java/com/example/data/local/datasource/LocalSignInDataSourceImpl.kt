@@ -14,4 +14,11 @@ class LocalSignInDataSourceImpl @Inject constructor(
                 password = fetchPassword()
             )
         }
+
+    override suspend fun saveSign(signInEntity: SignInEntity) {
+        with(signInPreference){
+            saveNum(signInEntity.num)
+            savePassword(signInEntity.password)
+        }
+    }
 }

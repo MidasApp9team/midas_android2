@@ -5,6 +5,7 @@ import com.example.domain.exception.BadRequestException
 import com.example.domain.exception.NotFoundException
 import com.example.domain.exception.ServerException
 import com.example.domain.param.SignInParam
+import com.example.domain.usecase.sign.SaveSignUseCase
 import com.example.domain.usecase.sign.SignInUseCase
 import com.example.midasandroid2.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,7 +15,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SignInViewModel @Inject constructor(
-    private val signInUseCase: SignInUseCase
+    private val signInUseCase: SignInUseCase,
+    private val saveSignUseCase: SaveSignUseCase
 ):BaseViewModel<SignInViewModel.Event>() {
 
     private val _token = MutableStateFlow(SignInParam("",""))
@@ -32,8 +34,13 @@ class SignInViewModel @Inject constructor(
         }
     )
 
+    fun saveSign(signInEntity: SignInEntity) = execute(
+        job = { saveSignUseCase.execute(signInEntity) },
+        onSuccess = {},
+        onFailure = {}
+    )
+
     sealed class Event{
-        object Success : Event()
         object BadRequest : Event()
         object NotFound : Event()
         object Server : Event()

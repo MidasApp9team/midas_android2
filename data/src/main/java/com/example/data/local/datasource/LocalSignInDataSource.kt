@@ -4,4 +4,6 @@ import com.example.domain.entity.SignInEntity
 
 interface LocalSignInDataSource {
     suspend fun autoLogin(): SignInEntity
+
+    suspend fun saveSign(signInEntity: SignInEntity)
 }
