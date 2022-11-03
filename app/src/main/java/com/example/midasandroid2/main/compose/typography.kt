@@ -46,6 +46,13 @@ object Typography {
         fontWeight = FontWeight.SemiBold,
         fontSize = 15.sp
     )
+
+    @Stable
+    val btnBody = TextStyle(
+        fontFamily = font,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 18.sp
+    )
 }
 
 @Composable
@@ -86,6 +93,20 @@ fun Body3(
         modifier = modifier,
         text = text,
         style = Typography.body3,
+        color = color
+    )
+}
+
+@Composable
+fun BtnBody(
+    modifier: Modifier = Modifier,
+    text: String,
+    color: Color = BaseColor.White
+){
+    Text(
+        modifier = modifier,
+        text = text,
+        style = Typography.btnBody,
         color = color
     )
 }
