@@ -11,6 +11,6 @@ fun date(): String{
 
 fun time(): String{
     val current = LocalDateTime.now()
-    val formatter = DateTimeFormatter.ofPattern("HH:mm:ss")
+    val formatter = DateTimeFormatter.ofPattern("HH:mm")
     return current.format(formatter)
 }
