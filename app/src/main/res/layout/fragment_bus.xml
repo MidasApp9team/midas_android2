@@ -58,5 +58,29 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et_station_num" />
 
+        <TextView
+            android:id="@+id/First_Bus_Txt"
+            android:layout_width="295dp"
+            android:layout_height="47dp"
+            android:layout_marginTop="44dp"
+            android:text="1차 버스"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_put" />
+
+        <TextView
+            android:id="@+id/Second_Bus_Txt"
+            android:layout_width="295dp"
+            android:layout_height="47dp"
+            android:layout_marginTop="32dp"
+            android:text="2차 버스"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/First_Bus_Txt" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
