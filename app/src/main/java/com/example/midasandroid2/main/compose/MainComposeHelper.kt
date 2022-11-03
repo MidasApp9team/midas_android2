@@ -1,8 +1,11 @@
 package com.example.midasandroid2.main.compose
 
+import android.util.Log
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -29,19 +32,61 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.midasandroid2.R
+import com.example.midasandroid2.main.MainActivity
+import com.example.midasandroid2.main.MainViewModel
+import com.example.midasandroid2.main.compose.SharedHelp.DATE
+import com.example.midasandroid2.main.compose.SharedHelp.IN
+import com.example.midasandroid2.main.compose.SharedHelp.OUT
+import com.example.midasandroid2.main.compose.local.Share
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+@Stable
+private val CommuteHeight: Dp = 42.dp
+
 @DelicateCoroutinesApi
 @Composable
 fun MainComposeHelper(
-    inTime: String? = null,
-    outTime: String? = null,
+    context: MainActivity,
     homeWorking: Boolean = true
 ){
-    var graphWidth by remember { mutableStateOf(1440) }
+    var inHour = 0
+    var inMin = 0
+    var outHour = 0
+    var outMin = 0
+    var timeSize by remember { mutableStateOf(0) }
+    var totalWork by remember { mutableStateOf(0) }
+    var inTime by remember { mutableStateOf(Share.getString(context, IN,"")) }
+    var outTime by remember { mutableStateOf(Share.getString(context,OUT,"")) }
+    var date = Share.getString(context,DATE,"")
+
+    if(date == ""){
+        Share.putString(context, DATE, date())
+        date = date()
+    }
+
+    if(date != date()){
+        Share.deleteString(context, IN)
+        Share.deleteString(context, OUT)
+        inTime = ""
+        outTime = ""
+    }
+
+    if(inTime.isNotEmpty() && outTime.isEmpty()){
+        timeSize = (inTime.substring(0 until 1).toInt() * 60 + inTime.substring(3 until 4).toInt())- (time().substring(0 until 1).toInt() + time().substring(3 until  4).toInt())
+        inHour = timeSize/60
+        inMin =  timeSize%60
+    }
+
+    if(inTime.isNotEmpty() && outTime.isNotEmpty()) {
+         timeSize = (outTime.substring(0 until 1).toInt() * 60 + outTime.substring(3 until 4).toInt())- (inTime.substring(0 until 1).toInt() + inTime.substring(3 until  4).toInt())
+    }
+
+    val graphStart = inHour+inHour
+
+    var graphWidth by remember { mutableStateOf(inHour+inMin) }
 
     Box(modifier = Modifier
         .fillMaxSize()
@@ -54,7 +99,7 @@ fun MainComposeHelper(
             GlobalScope.launch {
                 graphWidth = 0
                 delay(2000)
-                graphWidth = 1440
+                graphWidth = timeSize
             }
         }
     ){
@@ -63,52 +108,57 @@ fun MainComposeHelper(
                 .padding(horizontal = 22.dp)
         ) {
             Spacer(modifier = Modifier.height(13.dp))
-            
+
             TopRow()
 
             Spacer(modifier = Modifier.height(23.dp))
 
             Commute(inTime = inTime, outTime = outTime, homeWorking = homeWorking)
-            
+
             Spacer(modifier = Modifier.height(16.dp))
 
             Row() {
                 Body2(text = stringResource(id = R.string.total_work_time))
-                
+
                 Body2(
-                    text = "4시간 30분",
+                    text = totalWork.toString()+"분",
                     modifier = Modifier
                         .fillMaxWidth()
                         .wrapContentWidth(Alignment.End)
                 )
             }
 
-            Spacer(modifier = Modifier.height(12.dp))
-
-            Row() {
-                Body3(text = stringResource(id = R.string.week_work_time))
-
-                Body3(
-                    text = "18시간 30분",
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .wrapContentWidth(Alignment.End)
-                )
-            }
-            Row() {
-                Body3(text = stringResource(id = R.string.week_work_time_left))
-
-                Body3(
-                    text = "18시간 30분",
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .wrapContentWidth(Alignment.End)
-                )
-            }
-            
             Spacer(modifier = Modifier.height(30.dp))
 
-            Graph(graphStart = 0, graphWidth = graphWidth, graphColor = BaseColor.Red)
+            Graph(graphStart = graphStart, graphWidth = graphWidth)
+
+            Spacer(modifier = Modifier.height(30.dp))
+            
+            Row() {
+                PurpleBtn(
+                    text = stringResource(id = R.string.`in`)
+                ){
+                    if(inTime.isEmpty()){
+                        inTime = time()
+                        Share.putString(context, IN, time())
+                    }
+                }
+
+                PurpleBtn(
+                    text = stringResource(id = R.string.out),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentWidth(Alignment.End)
+                ) {
+                    if(inTime.isNotEmpty()){
+                        if(outTime.isEmpty()){
+                            outTime = time()
+                            totalWork = timeSize
+                            Share.putString(context, OUT, time())
+                        }
+                    }
+                }
+            }
         }
     }
 }
@@ -135,17 +185,16 @@ fun TopRow() {
     }
 }
 
-@Stable
-private val CommuteHeight: Dp = 42.dp
+
 
 @Composable
 fun Commute(
-    inTime: String?,
-    outTime: String?,
+    inTime: String,
+    outTime: String,
     homeWorking: Boolean
 ){
-    val inTime = if(inTime.isNullOrEmpty()) "xx:xx" else inTime
-    val outTime = if(outTime.isNullOrEmpty()) "xx:xx" else outTime
+    val inTime = inTime.ifEmpty { "xx:xx" }
+    val outTime = outTime.ifEmpty { "xx:xx" }
 
     Row(
         modifier = Modifier
@@ -154,15 +203,15 @@ fun Commute(
         Column() {
             Body2(
                 text = stringResource(id = R.string.in_time)
-                    +"   "
-                    +inTime,
+                        + "   "
+                        + inTime,
                 color = BaseColor.LightGreen
             )
-            
+
             Body2(
                 text = stringResource(id = R.string.out_time)
-                        +"   "
-                        +outTime,
+                        + "   "
+                        + outTime,
                 color = BaseColor.Red,
                 modifier = Modifier
                     .fillMaxHeight()
@@ -170,7 +219,7 @@ fun Commute(
             )
         }
 
-        if(homeWorking){
+        if (homeWorking) {
             Body1(
                 text = stringResource(id = R.string.home_working),
                 color = BaseColor.LightGreen,
@@ -199,8 +248,9 @@ private val GraphAnimationTween: Int = 2000
 fun Graph(
     graphStart: Int,
     graphWidth: Int,
-    graphColor: Color
 ) {
+
+    val graphColor = if(graphWidth >= 480) BaseColor.LightGreen else BaseColor.Red
 
     val animationProgress: Float by animateFloatAsState(
         targetValue = (graphWidth / 4).toFloat(),
@@ -227,4 +277,49 @@ fun Graph(
                 )
         )
     }
+}
+
+@Stable
+private val PurpleBtnWidth: Dp = 100.dp
+
+@Stable
+private val PurpleBtnHeight: Dp = 50.dp
+
+@Stable
+private val PurpleBtnCornerShape: Dp = 30.dp
+
+@Composable
+fun PurpleBtn(
+    modifier: Modifier = Modifier,
+    text: String,
+    onClick: (() -> Unit)?
+){
+    val interactionSource = remember { MutableInteractionSource() }
+    val isPressed = interactionSource.collectIsPressedAsState()
+
+    val btnColor =
+        if(isPressed.value) BaseColor.MainPurple else BaseColor.SubPurple
+
+    Box(
+        modifier = modifier
+            .width(PurpleBtnWidth)
+            .height(PurpleBtnHeight)
+            .background(
+                color = btnColor,
+                shape = RoundedCornerShape(PurpleBtnCornerShape)
+            )
+            .btnClickable(
+                rippleColor = btnColor,
+                onClick = onClick
+            ),
+        contentAlignment = Alignment.Center
+    ) {
+        BtnBody(text = text)
+    }
+}
+
+object SharedHelp{
+    const val IN = "IN"
+    const val OUT = "OUT"
+    const val DATE = "DATE"
 }

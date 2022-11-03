@@ -10,14 +10,14 @@ class LocalSignInDataSourceImpl @Inject constructor(
     override suspend fun autoLogin(): SignInEntity =
         with(signInPreference){
             SignInEntity(
-                num = fetchNum(),
+                empnum = fetchNum(),
                 password = fetchPassword()
             )
         }
 
     override suspend fun saveSign(signInEntity: SignInEntity) {
         with(signInPreference){
-            saveNum(signInEntity.num)
+            saveNum(signInEntity.empnum)
             savePassword(signInEntity.password)
         }
     }

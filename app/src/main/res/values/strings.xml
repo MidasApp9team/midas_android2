@@ -5,7 +5,9 @@
 
     <string name="commute_now">출퇴근 현황</string>
     <string name="today">Today</string>
+    <string name="in">출근</string>
     <string name="in_time">출근 시간</string>
+    <string name="out">퇴근</string>
     <string name="out_time">퇴근 시간</string>
     <string name="home_working">재택근무</string>
     <string name="total_work_time">총 근무 시간</string>

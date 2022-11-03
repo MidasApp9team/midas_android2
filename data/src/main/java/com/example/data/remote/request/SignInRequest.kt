@@ -3,11 +3,11 @@ package com.example.data.remote.request
 import com.example.domain.entity.SignInEntity
 
 data class SignInRequest(
-    val num: Int,
+    val empnum: String,
     val password: String
 )
 
 fun SignInEntity.toRequest() = SignInRequest(
-    num = num,
+    empnum = empnum,
     password = password
 )
