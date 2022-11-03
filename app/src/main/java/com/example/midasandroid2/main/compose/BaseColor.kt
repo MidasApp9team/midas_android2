@@ -10,4 +10,6 @@ object BaseColor {
     val Gray = Color(0xFFEDEDED)
     val Red = Color(0xFFFE6363)
     val LightGreen = Color(0xFF7CFF67)
+    val MainPurple = Color(0xFFDCC8FF)
+    val SubPurple = Color(0xFFD8C2FF)
 }

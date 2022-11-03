@@ -25,7 +25,9 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
     override fun initView() {
         binding.run {
             btnLogin.setOnClickListener {
-                signInViewModel.signIn(SignInEntity(ts(etEmployeeNum), ts(etPassword)))
+                //signInViewModel.signIn(SignInEntity(ts(etEmployeeNum), ts(etPassword)))
+                startActivity(Intent(this@SignInActivity, MainActivity::class.java))
+                finish()
             }
             btnSignUp.setOnClickListener {
                 startActivity(Intent(this@SignInActivity, SignUpActivity::class.java))

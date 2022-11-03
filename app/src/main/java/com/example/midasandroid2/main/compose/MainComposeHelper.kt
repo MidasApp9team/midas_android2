@@ -1,8 +1,11 @@
 package com.example.midasandroid2.main.compose
 
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -29,6 +32,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.midasandroid2.R
+import com.example.midasandroid2.main.MainViewModel
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -42,6 +46,8 @@ fun MainComposeHelper(
     homeWorking: Boolean = true
 ){
     var graphWidth by remember { mutableStateOf(1440) }
+
+
 
     Box(modifier = Modifier
         .fillMaxSize()
@@ -69,12 +75,12 @@ fun MainComposeHelper(
             Spacer(modifier = Modifier.height(23.dp))
 
             Commute(inTime = inTime, outTime = outTime, homeWorking = homeWorking)
-            
+
             Spacer(modifier = Modifier.height(16.dp))
 
             Row() {
                 Body2(text = stringResource(id = R.string.total_work_time))
-                
+
                 Body2(
                     text = "4시간 30분",
                     modifier = Modifier
@@ -83,32 +89,30 @@ fun MainComposeHelper(
                 )
             }
 
-            Spacer(modifier = Modifier.height(12.dp))
-
-            Row() {
-                Body3(text = stringResource(id = R.string.week_work_time))
-
-                Body3(
-                    text = "18시간 30분",
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .wrapContentWidth(Alignment.End)
-                )
-            }
-            Row() {
-                Body3(text = stringResource(id = R.string.week_work_time_left))
-
-                Body3(
-                    text = "18시간 30분",
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .wrapContentWidth(Alignment.End)
-                )
-            }
-            
             Spacer(modifier = Modifier.height(30.dp))
 
             Graph(graphStart = 0, graphWidth = graphWidth, graphColor = BaseColor.Red)
+
+            Spacer(modifier = Modifier.height(30.dp))
+            
+            Row() {
+                PurpleBtn(
+                    text = stringResource(id = R.string.`in`)
+                ){
+                    if(inEnabled.isNullOrEmpty()){
+                        mainViewModel.start()
+                    }
+                }
+
+                PurpleBtn(
+                    text = stringResource(id = R.string.out),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentWidth(Alignment.End)
+                ) {
+
+                }
+            }
         }
     }
 }
@@ -226,5 +230,44 @@ fun Graph(
                     color = graphColor
                 )
         )
+    }
+}
+
+@Stable
+private val PurpleBtnWidth: Dp = 100.dp
+
+@Stable
+private val PurpleBtnHeight: Dp = 50.dp
+
+@Stable
+private val PurpleBtnCornerShape: Dp = 30.dp
+
+@Composable
+fun PurpleBtn(
+    modifier: Modifier = Modifier,
+    text: String,
+    onClick: (() -> Unit)?
+){
+    val interactionSource = remember { MutableInteractionSource() }
+    val isPressed = interactionSource.collectIsPressedAsState()
+
+    val btnColor =
+        if(isPressed.value) BaseColor.MainPurple else BaseColor.SubPurple
+
+    Box(
+        modifier = modifier
+            .width(PurpleBtnWidth)
+            .height(PurpleBtnHeight)
+            .background(
+                color = btnColor,
+                shape = RoundedCornerShape(PurpleBtnCornerShape)
+            )
+            .btnClickable(
+                rippleColor = btnColor,
+                onClick = onClick
+            ),
+        contentAlignment = Alignment.Center
+    ) {
+        BtnBody(text = text)
     }
 }

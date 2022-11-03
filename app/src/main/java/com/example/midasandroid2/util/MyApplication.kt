@@ -13,3 +13,5 @@ var ACCESS_TOKEN = ""
 class MyApplication : Application()
 
 fun ts(textView: TextView): String = textView.text.toString()
+
+

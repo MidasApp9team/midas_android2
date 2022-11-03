@@ -20,8 +20,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main){
 
-    private val mainViewModel: MainViewModel by viewModels()
-
     override fun initView() {
         binding.run {
             btnCalendar.setOnClickListener {
@@ -38,12 +36,6 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main){
     }
 
     override fun observeEvent() {
-        repeatOnStarted {
-            mainViewModel.eventFlow.collect {
-                when(it){
 
-                }
-            }
-        }
     }
 }
