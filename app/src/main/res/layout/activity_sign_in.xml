@@ -131,14 +131,14 @@
             android:id="@+id/textView3"
             android:layout_width="221dp"
             android:layout_height="36dp"
-            android:layout_marginStart="92dp"
             android:layout_marginTop="80dp"
+            android:fontFamily="@font/inter_semibold"
             android:gravity="center"
+            android:includeFontPadding="false"
             android:text="계정이 없으십니까?"
             android:textColor="#000000"
             android:textSize="16sp"
-            android:fontFamily="@font/inter_semibold"
-            android:includeFontPadding="false"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_login" />
 

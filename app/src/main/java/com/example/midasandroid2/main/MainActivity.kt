@@ -1,43 +1,62 @@
 package com.example.midasandroid2.main
 
-import android.content.Intent
-import androidx.activity.viewModels
-import androidx.compose.ui.platform.ViewCompositionStrategy
+import android.view.MenuItem
+import androidx.viewpager2.widget.ViewPager2
 import com.example.midasandroid2.R
 import com.example.midasandroid2.base.BaseActivity
-import com.example.midasandroid2.calendar.CalendarActivity
 import com.example.midasandroid2.databinding.ActivityMainBinding
-import com.example.midasandroid2.main.compose.MainComposeHelper
-import com.example.midasandroid2.util.repeatOnStarted
+import com.example.midasandroid2.util.ViewPagerAdapter
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main){
+class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main), BottomNavigationView.OnNavigationItemSelectedListener{
 
-    private val mainViewModel: MainViewModel by viewModels()
+    private lateinit var bottomNavigationView: BottomNavigationView
 
     override fun initView() {
         binding.run {
-            btnCalendar.setOnClickListener {
-                startActivity(Intent(this@MainActivity,CalendarActivity::class.java))
+            pager.run {
+                adapter = ViewPagerAdapter(this@MainActivity)
+                registerOnPageChangeCallback(
+                    object : ViewPager2.OnPageChangeCallback() {
+                        override fun onPageSelected(position: Int) {
+                            super.onPageSelected(position)
+                            mainBottomNavigation.menu.getItem(position).isChecked = true
+                        }
+                    }
+                )
             }
+            mainBottomNavigation.setOnNavigationItemSelectedListener(this@MainActivity)
 
-            composeView.apply {
-                setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-                setContent {
-                    MainComposeHelper()
-                }
+            bottomNavigationView = mainBottomNavigation
+            bottomNavigationView.run {
+                setOnNavigationItemSelectedListener(this@MainActivity)
+                selectedItemId = R.id.menu_time
             }
         }
     }
 
-    override fun observeEvent() {
-        repeatOnStarted {
-            mainViewModel.eventFlow.collect {
-                when(it){
+    override fun observeEvent() {}
 
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        binding.run {
+            when (item.itemId) {
+                R.id.menu_time -> {
+                    pager.currentItem = 0
+                    return true
+                }
+                R.id.menu_home -> {
+                    pager.currentItem = 1
+                    return true
+                }
+                R.id.menu_bus -> {
+                    pager.currentItem = 2
+                    return true
                 }
             }
+            return false
         }
+
     }
 }
