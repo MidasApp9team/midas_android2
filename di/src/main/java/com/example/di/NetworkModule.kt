@@ -1,6 +1,6 @@
 package com.example.di
 
-import com.example.data.remote.api.SignInAPI
+import com.example.data.remote.api.SignAPI
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -42,6 +42,6 @@ object NetworkModule {
     @Provides
     fun provideSignInAPI(
         retrofit: Retrofit
-    ): SignInAPI =
-        retrofit.create(SignInAPI::class.java)
+    ): SignAPI =
+        retrofit.create(SignAPI::class.java)
 }

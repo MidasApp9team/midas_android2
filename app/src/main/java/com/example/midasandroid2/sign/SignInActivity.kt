@@ -13,6 +13,7 @@ import com.example.midasandroid2.databinding.ActivitySignInBinding
 import com.example.midasandroid2.main.MainActivity
 import com.example.midasandroid2.util.ACCESS_TOKEN
 import com.example.midasandroid2.util.repeatOnStarted
+import com.example.midasandroid2.util.ts
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
@@ -24,7 +25,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
     override fun initView() {
         binding.run {
             btnLogin.setOnClickListener {
-                signInViewModel.signIn(SignInEntity(etEmployeeNum.text.toString(), etPassword.text.toString()))
+                signInViewModel.signIn(SignInEntity(ts(etEmployeeNum), ts(etPassword)))
             }
             btnSignUp.setOnClickListener {
                 startActivity(Intent(this@SignInActivity, SignUpActivity::class.java))
