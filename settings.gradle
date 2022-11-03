@@ -14,3 +14,6 @@ dependencyResolutionManagement {
 }
 rootProject.name = "MidasAndroid2"
 include ':app'
+include ':di'
+include ':data'
+include ':domain'
