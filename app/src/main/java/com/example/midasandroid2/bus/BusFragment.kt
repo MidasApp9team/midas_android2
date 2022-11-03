@@ -11,7 +11,9 @@ import com.example.midasandroid2.databinding.FragmentBusBinding
 
 class BusFragment : BaseFragment<FragmentBusBinding>(R.layout.fragment_bus) {
     override fun initView() {
+        binding.run {
 
+        }
     }
 
     override fun observeEvent() {}
