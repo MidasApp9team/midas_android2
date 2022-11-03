@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">MidasAndroid2</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_main_help">MainHelp</string>
+
+    <string name="commute_now">출퇴근 현황</string>
+    <string name="today">Today</string>
+    <string name="in_time">출근 시간</string>
+    <string name="out_time">퇴근 시간</string>
+    <string name="home_working">재택근무</string>
+    <string name="total_work_time">총 근무 시간</string>
+    <string name="week_work_time">주 근무 시간</string>
+    <string name="week_work_time_left">주 근무 시간 달성까지</string>
 </resources>
