@@ -7,7 +7,6 @@ class MainViewModel(
 ): BaseViewModel<MainViewModel.Event>() {
 
     sealed class Event{
-        
-    }
 
+    }
 }

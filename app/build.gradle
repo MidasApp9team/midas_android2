@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.midasandroid2"
-        minSdk 28
+        minSdk 26
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -35,12 +35,21 @@ android {
     buildFeatures{
         dataBinding = true
     }
+    packagingOptions {
+        exclude 'META-INF/gradle/incremental.annotation.processors'
+    }
+    hilt {
+        enableAggregatingTask = true
+    }
 }
 
 dependencies {
 
     implementation project(':domain')
     implementation project(':di')
+
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
 
     implementation 'androidx.activity:activity-ktx:1.1.0'
     implementation 'androidx.fragment:fragment-ktx:1.2.5'
@@ -50,8 +59,8 @@ dependencies {
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 
     implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.5.1'
-    implementation 'com.google.android.material:material:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

@@ -2,7 +2,7 @@ package com.example.midasandroid2.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.domain.NeedLoginException
+import com.example.domain.exception.NeedLoginException
 import com.example.midasandroid2.util.MutableEventFlow
 import com.example.midasandroid2.util.asEventFlow
 import kotlinx.coroutines.launch
