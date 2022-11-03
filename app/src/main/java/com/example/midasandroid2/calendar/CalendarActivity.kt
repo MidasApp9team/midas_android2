@@ -1,5 +1,6 @@
 package com.example.midasandroid2.calendar
 
+import android.content.Intent
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.midasandroid2.R
 import com.example.midasandroid2.base.BaseActivity
@@ -18,10 +19,14 @@ class CalendarActivity : BaseActivity<ActivityCalendarBinding>(R.layout.activity
 
             rv.layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL,false)
             rv.setHasFixedSize(true)
-            rv.adapter = CalendarAdapter(rvList)
+            rv.adapter = CalendarAdapter(rvList,this@CalendarActivity)
         }
     }
 
     override fun observeEvent() {}
+
+    fun goFix(name: String){
+        DialogFix(this, name).show()
+    }
 
 }
