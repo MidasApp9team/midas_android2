@@ -1,6 +1,6 @@
 package com.example.domain.entity
 
 data class SignInEntity(
-    val num: Int,
+    val empnum: String,
     val password: String
 )
