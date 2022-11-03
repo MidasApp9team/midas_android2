@@ -9,6 +9,82 @@
         android:layout_height="match_parent"
         tools:context=".sign.SignInActivity">
 
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="247dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="107dp"
+            android:layout_marginTop="10dp"
+            android:text="Welcome!"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="48sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="173dp"
+            android:layout_height="14dp"
+            android:layout_marginStart="174dp"
+            android:layout_marginTop="68dp"
+            android:text="유연근무제 도입 관리 프로그램"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="11dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="221dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="92dp"
+            android:layout_marginTop="516dp"
+            android:text="사원번호가 없으십니까?"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/editText1"
+            android:layout_width="254dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="76dp"
+            android:layout_marginTop="224dp"
+            android:ems="10"
+            android:hint="사원 번호를 입력하세요."
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="254dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="76dp"
+            android:layout_marginTop="296dp"
+            android:ems="10"
+            android:hint="비밀번호를 입력하세요."
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="193dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="76dp"
+            android:layout_marginTop="348dp"
+            android:text="자동 로그인 하시겠습니까?"
+            android:textSize="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
