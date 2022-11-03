@@ -1,5 +1,6 @@
 package com.example.di
 
+import com.example.data.remote.api.DateAPI
 import com.example.data.remote.api.SignAPI
 import dagger.Module
 import dagger.Provides
@@ -44,4 +45,11 @@ object NetworkModule {
         retrofit: Retrofit
     ): SignAPI =
         retrofit.create(SignAPI::class.java)
+
+    @Singleton
+    @Provides
+    fun provideDateAPI(
+        retrofit: Retrofit
+    ): DateAPI =
+        retrofit.create(DateAPI::class.java)
 }

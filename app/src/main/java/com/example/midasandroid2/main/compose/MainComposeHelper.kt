@@ -38,6 +38,8 @@ import com.example.midasandroid2.main.compose.SharedHelp.DATE
 import com.example.midasandroid2.main.compose.SharedHelp.IN
 import com.example.midasandroid2.main.compose.SharedHelp.OUT
 import com.example.midasandroid2.main.compose.local.Share
+import com.example.midasandroid2.util.start_time
+import com.example.midasandroid2.util.stop_time
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -155,6 +157,10 @@ fun MainComposeHelper(
                             outTime = time()
                             totalWork = timeSize
                             Share.putString(context, OUT, time())
+
+                            start_time = inTime
+                            stop_time = outTime
+                            date = date()
                         }
                     }
                 }

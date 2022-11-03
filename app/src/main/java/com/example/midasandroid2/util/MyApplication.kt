@@ -10,6 +10,10 @@ import dagger.hilt.android.HiltAndroidApp
 var ACCESS_TOKEN = ""
 var owner = false
 
+var start_time = ""
+var stop_time = ""
+var date = ""
+
 @HiltAndroidApp
 class MyApplication : Application()
 

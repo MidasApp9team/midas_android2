@@ -1,5 +1,7 @@
 package com.example.di
 
+import com.example.data.remote.datasource.RemoteDateDataSource
+import com.example.data.remote.datasource.RemoteDateDataSourceImpl
 import com.example.data.remote.datasource.RemoteSignInDataSource
 import com.example.data.remote.datasource.RemoteSignInDataSourceImpl
 import dagger.Binds
@@ -15,4 +17,9 @@ abstract class RemoteDataSourceModule {
     abstract fun bindRemoteSignInDataModule(
         remoteSignInDataSourceImpl: RemoteSignInDataSourceImpl
     ): RemoteSignInDataSource
+
+    @Binds
+    abstract fun bindRemoteDateDataModule(
+        remoteDateDataSourceImpl: RemoteDateDataSourceImpl
+    ): RemoteDateDataSource
 }

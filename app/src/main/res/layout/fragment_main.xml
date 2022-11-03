@@ -69,13 +69,23 @@
                 app:layout_constraintTop_toBottomOf="@+id/card_view" />
 
             <Button
-                android:id="@+id/btn_calendar"
+                android:id="@+id/btn_put"
                 style="@style/btn_text"
-                android:text="캘린더"
+                android:text="제출"
                 android:layout_marginTop="40dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/compose_view" />
+
+            <Button
+                android:id="@+id/btn_calendar"
+                style="@style/btn_text"
+                android:text="캘린더"
+                android:visibility="invisible"
+                android:layout_marginTop="40dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_put" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

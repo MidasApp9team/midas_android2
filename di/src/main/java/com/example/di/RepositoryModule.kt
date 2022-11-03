@@ -1,6 +1,8 @@
 package com.example.di
 
+import com.example.data.repository.DateRepositoryImpl
 import com.example.data.repository.SignRepositoryImpl
+import com.example.domain.repository.DateRepository
 import com.example.domain.repository.SignRepository
 import dagger.Binds
 import dagger.Module
@@ -15,4 +17,9 @@ abstract class RepositoryModule {
     abstract fun bindSignInRepository(
         signInRepositoryImpl: SignRepositoryImpl
     ): SignRepository
+
+    @Binds
+    abstract fun bindDateRepository(
+        dateRepositoryImpl: DateRepositoryImpl
+    ): DateRepository
 }
