@@ -2,6 +2,7 @@ package com.example.midasandroid2.sign
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.midasandroid2.R
 
 class SignUpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
