@@ -76,15 +76,6 @@ fun MainComposeHelper(
         outTime = ""
     }
 
-    if(inTime.isNotEmpty() && outTime.isEmpty()){
-        timeSize = (inTime.substring(0 until 1).toInt() * 60 + inTime.substring(3 until 4).toInt())- (time().substring(0 until 1).toInt() + time().substring(3 until  4).toInt())
-        inHour = timeSize/60
-        inMin =  timeSize%60
-    }
-
-    if(inTime.isNotEmpty() && outTime.isNotEmpty()) {
-         timeSize = (outTime.substring(0 until 1).toInt() * 60 + outTime.substring(3 until 4).toInt())- (inTime.substring(0 until 1).toInt() + inTime.substring(3 until  4).toInt())
-    }
 
     val graphStart = inHour+inHour
 
@@ -123,7 +114,7 @@ fun MainComposeHelper(
                 Body2(text = stringResource(id = R.string.total_work_time))
 
                 Body2(
-                    text = totalWork.toString()+"분",
+                    text = (totalWork/60).toString()+"시간 "+(totalWork%60).toString()+"분",
                     modifier = Modifier
                         .fillMaxWidth()
                         .wrapContentWidth(Alignment.End)
@@ -143,6 +134,9 @@ fun MainComposeHelper(
                     if(inTime.isEmpty()){
                         inTime = time()
                         Share.putString(context, IN, time())
+                        timeSize = (inTime.substring(0 until 1).toInt() * 60 + inTime.substring(3 until 4).toInt())- (time().substring(0 until 1).toInt() + time().substring(3 until  4).toInt())
+                        inHour = timeSize/60
+                        inMin =  timeSize%60
                     }
                 }
 
@@ -155,9 +149,11 @@ fun MainComposeHelper(
                     if(inTime.isNotEmpty()){
                         if(outTime.isEmpty()){
                             outTime = time()
+                            Log.d("TAG", "MainComposeHelper: $totalWork")
+
+                            timeSize = (outTime.substring(0 until 1).toInt() * 60 + outTime.substring(3 until 4).toInt())- (inTime.substring(0 until 1).toInt() + inTime.substring(3 until  4).toInt())
                             totalWork = timeSize
                             Share.putString(context, OUT, time())
-
                             start_time = inTime
                             stop_time = outTime
                             date = date()

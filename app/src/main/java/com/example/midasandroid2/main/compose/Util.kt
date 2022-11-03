@@ -14,3 +14,9 @@ fun time(): String{
     val formatter = DateTimeFormatter.ofPattern("HH:mm")
     return current.format(formatter)
 }
+
+fun dateInt(): String{
+    val current = LocalDateTime.now()
+    val formatter = DateTimeFormatter.ofPattern("HHmm")
+    return current.format(formatter)
+}

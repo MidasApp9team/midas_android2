@@ -8,7 +8,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.HiltAndroidApp
 
 var ACCESS_TOKEN = ""
-var owner = false
+var owner = true
 
 var start_time = ""
 var stop_time = ""
