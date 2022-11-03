@@ -8,6 +8,14 @@ class SignInPreferenceImpl @Inject constructor(
     private val s: SharedPreferenceHelper
 ): SignInPreference {
 
+    override suspend fun saveNum(num: Int) {
+        s.saveIntPreference(NUM,num)
+    }
+
+    override suspend fun savePassword(password: String) {
+        s.saveStringPreference(PASSWORD,password)
+    }
+
     override suspend fun fetchNum(): Int =
         s.fetchIntPreference(NUM,0)
 
