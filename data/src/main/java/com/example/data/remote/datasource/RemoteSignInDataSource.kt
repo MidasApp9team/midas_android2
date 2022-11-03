@@ -5,7 +5,7 @@ import com.example.domain.entity.SignUpEntity
 import com.example.domain.param.SignInParam
 
 interface RemoteSignInDataSource {
-    suspend fun signIn(signInEntity: SignInEntity): SignInParam
+    suspend fun signIn(signInEntity: SignInEntity): String
 
     suspend fun signUp(signUpEntity: SignUpEntity)
 }

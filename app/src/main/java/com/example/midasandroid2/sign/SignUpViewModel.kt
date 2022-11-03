@@ -14,13 +14,12 @@ class SignUpViewModel @Inject constructor(
 
     fun signUp(signUpEntity: SignUpEntity) = execute(
         job = { signUpUseCase.execute(signUpEntity) },
-        onSuccess = { emitEvent(Event.Success) },
-        onFailure = {
-            when(it) {
-                is BadRequestException -> emitEvent(Event.BadRequest)
-            }
+        onSuccess = { emitEvent(Event.Success) }
+    ) {
+        when (it) {
+            is BadRequestException -> emitEvent(Event.BadRequest)
         }
-    )
+    }
 
     sealed class Event{
         object Success: Event()

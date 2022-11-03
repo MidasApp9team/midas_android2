@@ -1,10 +1,12 @@
 package com.example.midasandroid2.main
 
+import android.util.Log
 import android.view.MenuItem
 import androidx.viewpager2.widget.ViewPager2
 import com.example.midasandroid2.R
 import com.example.midasandroid2.base.BaseActivity
 import com.example.midasandroid2.databinding.ActivityMainBinding
+import com.example.midasandroid2.util.ACCESS_TOKEN
 import com.example.midasandroid2.util.ViewPagerAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -12,9 +14,12 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main), BottomNavigationView.OnNavigationItemSelectedListener{
 
+    //gur061201@
     private lateinit var bottomNavigationView: BottomNavigationView
 
     override fun initView() {
+
+        Log.d("TAG", "token: $ACCESS_TOKEN")
         binding.run {
             pager.run {
                 adapter = ViewPagerAdapter(this@MainActivity)

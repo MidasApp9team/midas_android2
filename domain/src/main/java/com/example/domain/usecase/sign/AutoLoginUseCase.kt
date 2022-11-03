@@ -7,6 +7,6 @@ import javax.inject.Inject
 
 class AutoLoginUseCase @Inject constructor(
     private val signRepository: SignRepository
-): UseCase<Unit, SignInParam>(){
+): UseCase<Unit, String>(){
     override suspend fun execute(data: Unit) = signRepository.autoLogin()
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<network-security-config>
+<network-config>
     <domain-config cleartextTrafficPermitted="true">
-        <domain includeSubdomains="true">ws.bus.go.kr</domain>
+        <domain includeSubdomains="true">http://192.168.101.84:8080/api/</domain>
     </domain-config>
-</network-security-config>
+</network-config>

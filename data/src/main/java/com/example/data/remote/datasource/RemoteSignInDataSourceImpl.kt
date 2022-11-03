@@ -11,7 +11,7 @@ class RemoteSignInDataSourceImpl @Inject constructor(
     private val signAPI: SignAPI
 ): RemoteSignInDataSource {
     override suspend fun signIn(signInEntity: SignInEntity) =
-        signAPI.signIn(signInEntity.toRequest()).toParam()
+        signAPI.signIn(signInEntity.toRequest())
 
     override suspend fun signUp(signUpEntity: SignUpEntity) =
         signAPI.signUp(signUpEntity.toRequest())

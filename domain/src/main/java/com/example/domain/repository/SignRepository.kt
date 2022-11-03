@@ -6,11 +6,11 @@ import com.example.domain.param.SignInParam
 
 interface SignRepository {
 
-    suspend fun signIn(signInEntity: SignInEntity): SignInParam
+    suspend fun signIn(signInEntity: SignInEntity): String
 
     suspend fun signUp(signUpEntity: SignUpEntity)
 
-    suspend fun autoLogin(): SignInParam
+    suspend fun autoLogin(): String
 
     suspend fun saveSign(signInEntity: SignInEntity)
 }

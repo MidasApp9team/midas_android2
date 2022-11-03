@@ -18,7 +18,7 @@ class SignRepositoryImpl @Inject constructor(
     override suspend fun signUp(signUpEntity: SignUpEntity) =
         remoteSignDataSource.signUp(signUpEntity)
 
-    override suspend fun autoLogin(): SignInParam {
+    override suspend fun autoLogin(): String {
         val signData = localSignInDataSource.autoLogin()
         return remoteSignDataSource.signIn(signData)
     }

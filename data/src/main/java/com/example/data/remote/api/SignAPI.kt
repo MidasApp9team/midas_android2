@@ -4,6 +4,7 @@ import com.example.data.remote.request.SignInRequest
 import com.example.data.remote.request.SignUpRequest
 import com.example.data.remote.response.SignInResponse
 import retrofit2.http.Body
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface SignAPI {
@@ -11,7 +12,7 @@ interface SignAPI {
     @POST("user/signin.do")
     suspend fun signIn(
         @Body signInRequest: SignInRequest
-    ): SignInResponse
+    ): String
 
     @POST("user/signup.do")
     suspend fun signUp(

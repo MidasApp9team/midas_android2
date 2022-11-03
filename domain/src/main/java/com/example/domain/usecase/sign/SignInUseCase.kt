@@ -8,6 +8,6 @@ import javax.inject.Inject
 
 class SignInUseCase @Inject constructor(
     private val signRepository: SignRepository
-): UseCase<SignInEntity, SignInParam>(){
+): UseCase<SignInEntity, String>(){
     override suspend fun execute(data: SignInEntity) = signRepository.signIn(data)
 }

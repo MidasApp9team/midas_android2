@@ -8,6 +8,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.HiltAndroidApp
 
 var ACCESS_TOKEN = ""
+var owner = false
 
 @HiltAndroidApp
 class MyApplication : Application()

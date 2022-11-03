@@ -16,6 +16,7 @@ import com.example.midasandroid2.util.repeatOnStarted
 import com.example.midasandroid2.util.ts
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
+import kotlin.math.sign
 
 @AndroidEntryPoint
 class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sign_in){
@@ -25,7 +26,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
     override fun initView() {
         binding.run {
             btnLogin.setOnClickListener {
-                //signInViewModel.signIn(SignInEntity(ts(etEmployeeNum), ts(etPassword)))
+                signInViewModel.signIn(SignInEntity(ts(etEmployeeNum), ts(etPassword)))
                 startActivity(Intent(this@SignInActivity, MainActivity::class.java))
                 finish()
             }
@@ -37,16 +38,14 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
     }
 
     override fun observeEvent() {
-        repeatOnStarted {
-            signInViewModel.eventFlow.collect {
-                when(it) {
-                    is SignInViewModel.Event.Success -> {
-                        startActivity(Intent(this@SignInActivity, MainActivity::class.java))
-                        finish()
-                    }
-                    is SignInViewModel.Event.Server -> showToastShort("서버가 닫혀있습니다")
-                    else -> showToastShort("알 수 없는 오류입니다")
-                }
+        signInViewModel.run {
+            loginSuccess.observe(this@SignInActivity){
+                ACCESS_TOKEN = it
+                startActivity(Intent(this@SignInActivity, MainActivity::class.java))
+                finish()
+            }
+            loginFail.observe(this@SignInActivity){
+                showToastShort(it)
             }
         }
     }
