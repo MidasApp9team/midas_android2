@@ -68,8 +68,6 @@ class BusActivity : AppCompatActivity() {
                     println(arrmsg1_Node.textContent)
                     println(arrmsg2_Node.textContent)
                     println(rtNm_Node.textContent)
-                } else {
-                    println("x")
                 }
             }
         }

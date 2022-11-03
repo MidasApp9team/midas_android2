@@ -26,6 +26,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
                 finish()
             }
         }
+    }
 
     override fun observeEvent() {
     }
