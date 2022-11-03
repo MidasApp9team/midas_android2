@@ -28,17 +28,68 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:background="@drawable/background_white_board"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView5" >
+
+            <EditText
+                android:id="@+id/et_year"
+                style="@style/basic_small_text"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:gravity="center"
+                android:hint="년"
+                android:inputType="number"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/et_month"
+                style="@style/basic_small_text"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:hint="월"
+                android:inputType="number"
+                app:layout_constraintBottom_toBottomOf="@+id/et_year"
+                app:layout_constraintEnd_toStartOf="@+id/et_day"
+                app:layout_constraintStart_toEndOf="@+id/et_year"
+                app:layout_constraintTop_toTopOf="@+id/et_year" />
+
+            <EditText
+                android:id="@+id/et_day"
+                style="@style/basic_small_text"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:gravity="center"
+                android:hint="일"
+                android:inputType="number"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="20dp"
             android:layout_marginEnd="30dp"
             android:background="@drawable/background_white_board"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView5">
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
             <EditText
                 android:id="@+id/et_home_reason"
